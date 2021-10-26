@@ -7,7 +7,9 @@ local setup = function(options)
   end
 
   vim.g.virtual_column_column_number = utils.ternily(options.column_number, 80)
+  vim.g.virtual_column_overlay = utils.ternily(options.overlay, false)
   vim.g.virtual_column_enabled = utils.ternily(options.enabled, true)
+  print(vim.g.virtual_column_overlay)
 
   vim.g.virtual_column_virtual_text = {
     virt_text = {{"│"}},
@@ -61,7 +63,11 @@ M.refresh = function()
       local num_lines = vim.api.nvim_buf_line_count(bnr)
 
       for i = 0,num_lines-1,1 do
-        if #vim.api.nvim_buf_get_lines(bufnr, i, i+1, false)[1] <= vim.g.virtual_column_column_number then
+
+        if
+          vim.g.virtual_column_overlay or
+          #vim.api.nvim_buf_get_lines(bufnr, i, i+1, false)[1] <= vim.g.virtual_column_column_number
+        then
           vim.schedule_wrap(vim.api.nvim_buf_set_extmark(
               bufnr,
               vim.g.virtual_column_namespace,
