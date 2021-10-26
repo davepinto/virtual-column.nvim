@@ -9,10 +9,9 @@ local setup = function(options)
   vim.g.virtual_column_column_number = utils.ternily(options.column_number, 80)
   vim.g.virtual_column_overlay = utils.ternily(options.overlay, false)
   vim.g.virtual_column_enabled = utils.ternily(options.enabled, true)
-  print(vim.g.virtual_column_overlay)
 
   vim.g.virtual_column_virtual_text = {
-    virt_text = {{"│"}},
+    virt_text = {{utils.ternily(options.vert_char, "|")}},
     virt_text_win_col = vim.g.virtual_column_column_number,
     hl_mode = "combine"
   }

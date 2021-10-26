@@ -21,6 +21,7 @@ Example Configuration
 require('davepinto/virtual-column').setup({
     column_number = 80,
     overlay = false,
+    vert_char = "│",
     enabled = true
 })
 ```
