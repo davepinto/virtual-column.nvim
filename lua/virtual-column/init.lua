@@ -10,6 +10,7 @@ local setup = function(options)
   vim.g.virtual_column_overlay = utils.ternily(options.overlay, false)
   vim.g.virtual_column_enabled = utils.ternily(options.enabled, true)
   vim.g.virtual_column_buftype_exclude = utils.ternily(options.buftype_exclude, {})
+  vim.g.virtual_column_filetype_exclude = utils.ternily(options.filetype_exclude, {})
 
   vim.g.virtual_column_virtual_text = {
     virt_text = {{utils.ternily(options.vert_char, "|")}},
@@ -59,12 +60,15 @@ M.refresh = function()
 
   if vim.g.virtual_column_enabled then
     local bufnr = vim.api.nvim_get_current_buf()
+
     local buftype = vim.fn.getbufvar(vim.api.nvim_get_current_buf(), '&buftype')
+    local filetype = vim.fn.getbufvar(vim.api.nvim_get_current_buf(), '&filetype')
 
     if
       vim.api.nvim_buf_is_valid(bufnr) and
       vim.api.nvim_buf_is_loaded(bufnr) and
-      not utils.includes(vim.g.virtual_column_buftype_exclude, buftype)
+      not utils.includes(vim.g.virtual_column_buftype_exclude, buftype) and
+      not utils.includes(vim.g.virtual_column_filetype_exclude, filetype)
     then
       local num_lines = vim.api.nvim_buf_line_count(bnr)
 
