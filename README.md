@@ -25,3 +25,11 @@ require('davepinto/virtual-column').setup({
     enabled = true
 })
 ```
+
+Color change
+
+You can change column color via `VirtualColumn` highlight group:
+
+```vim
+  hi VirtualColumn guifg=#111111
+```
