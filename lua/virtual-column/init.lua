@@ -9,6 +9,7 @@ local setup = function(options)
   vim.g.virtual_column_column_number = utils.ternily(options.column_number, 80)
   vim.g.virtual_column_overlay = utils.ternily(options.overlay, false)
   vim.g.virtual_column_enabled = utils.ternily(options.enabled, true)
+  vim.g.virtual_column_buftype_exclude = utils.ternily(options.buftype_exclude, {})
 
   vim.g.virtual_column_virtual_text = {
     virt_text = {{utils.ternily(options.vert_char, "|")}},
@@ -58,7 +59,13 @@ M.refresh = function()
 
   if vim.g.virtual_column_enabled then
     local bufnr = vim.api.nvim_get_current_buf()
-    if vim.api.nvim_buf_is_valid(bufnr) and vim.api.nvim_buf_is_loaded(bufnr) then
+    local buftype = vim.fn.getbufvar(vim.api.nvim_get_current_buf(), '&buftype')
+
+    if
+      vim.api.nvim_buf_is_valid(bufnr) and
+      vim.api.nvim_buf_is_loaded(bufnr) and
+      not utils.includes(vim.g.virtual_column_buftype_exclude, buftype)
+    then
       local num_lines = vim.api.nvim_buf_line_count(bnr)
 
       for i = 0,num_lines-1,1 do
