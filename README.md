@@ -23,6 +23,9 @@ require('davepinto/virtual-column').setup({
     overlay = false,
     vert_char = "│",
     enabled = true,
-    buftype_exclude = { 'nofile', 'help' },
+
+    -- do not show column on this buffers and types
+    buftype_exclude = {},
+    filetype_exclude = {},
 })
 ```
