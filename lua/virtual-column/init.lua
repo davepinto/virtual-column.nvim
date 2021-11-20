@@ -61,8 +61,8 @@ M.refresh = function()
   if vim.g.virtual_column_enabled then
     local bufnr = vim.api.nvim_get_current_buf()
 
-    local buftype = vim.fn.getbufvar(vim.api.nvim_get_current_buf(), '&buftype')
-    local filetype = vim.fn.getbufvar(vim.api.nvim_get_current_buf(), '&filetype')
+    local buftype = vim.fn.getbufvar(bufnr, '&buftype')
+    local filetype = vim.fn.getbufvar(bufnr, '&filetype')
 
     if
       vim.api.nvim_buf_is_valid(bufnr) and
