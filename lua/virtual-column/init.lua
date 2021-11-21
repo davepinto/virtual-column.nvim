@@ -11,7 +11,7 @@ local setup = function(options)
   vim.g.virtual_column_enabled = utils.ternily(options.enabled, true)
 
   vim.g.virtual_column_virtual_text = {
-    virt_text = {{utils.ternily(options.vert_char, "|")}},
+    virt_text = {{utils.ternily(options.vert_char, "|"), "VirtualColumn"}},
     virt_text_win_col = vim.g.virtual_column_column_number,
     hl_mode = "combine"
   }
