@@ -18,7 +18,7 @@ use 'davepinto/virtual-column.nvim'
 Example Configuration
 
 ```lua
-require('davepinto/virtual-column').setup({
+require('virtual-column').init({
     column_number = 80,
     overlay = false,
     vert_char = "│",
