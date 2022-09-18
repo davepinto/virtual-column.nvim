@@ -6,7 +6,7 @@ local setup = function(options)
     options = {}
   end
 
-  vim.g.virtual_column_column_number = utils.ternily(options.column_number, 80)
+  vim.g.virtual_column_column_number = utils.ternily(options.column_number - 1, 79)
   vim.g.virtual_column_overlay = utils.ternily(options.overlay, false)
   vim.g.virtual_column_enabled = utils.ternily(options.enabled, true)
   vim.g.virtual_column_buftype_exclude = utils.ternily(options.buftype_exclude, {})
