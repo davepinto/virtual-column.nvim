@@ -44,8 +44,8 @@ M.disable = function()
     return
   end
 
-  local bufnr = vim.api.nvim_get_current_buf()
-  vim.api.nvim_buf_clear_namespace(bufnr, vim.g.virtual_column_namespace, 0, -1)
+  local buffer = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_clear_namespace(buffer, vim.g.virtual_column_namespace, 0, -1)
 end
 
 M.refresh = function()
@@ -56,30 +56,30 @@ M.refresh = function()
     return
   end
 
-  vim.api.nvim_buf_clear_namespace(bufnr, vim.g.virtual_column_namespace, 0, -1)
+  vim.api.nvim_buf_clear_namespace(buffer, vim.g.virtual_column_namespace, 0, -1)
 
   if vim.g.virtual_column_enabled then
-    local bufnr = vim.api.nvim_get_current_buf()
+    local buffer = vim.api.nvim_get_current_buf()
 
-    local buftype = vim.fn.getbufvar(bufnr, '&buftype')
-    local filetype = vim.fn.getbufvar(bufnr, '&filetype')
+    local buftype = vim.fn.getbufvar(buffer, '&buftype')
+    local filetype = vim.fn.getbufvar(buffer, '&filetype')
 
     if
-      vim.api.nvim_buf_is_valid(bufnr) and
-      vim.api.nvim_buf_is_loaded(bufnr) and
+      vim.api.nvim_buf_is_valid(buffer) and
+      vim.api.nvim_buf_is_loaded(buffer) and
       not utils.includes(vim.g.virtual_column_buftype_exclude, buftype) and
       not utils.includes(vim.g.virtual_column_filetype_exclude, filetype)
     then
-      local num_lines = vim.api.nvim_buf_line_count(bnr)
+      local num_lines = vim.api.nvim_buf_line_count(buffer)
 
       for i = 0,num_lines-1,1 do
 
         if
           vim.g.virtual_column_overlay or
-          #vim.api.nvim_buf_get_lines(bufnr, i, i+1, false)[1] <= vim.g.virtual_column_column_number
+          #vim.api.nvim_buf_get_lines(buffer, i, i+1, false)[1] <= vim.g.virtual_column_column_number
         then
           vim.schedule_wrap(vim.api.nvim_buf_set_extmark(
-              bufnr,
+              buffer,
               vim.g.virtual_column_namespace,
               i,
               -1,
