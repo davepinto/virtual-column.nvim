@@ -56,11 +56,10 @@ M.refresh = function()
     return
   end
 
+  local buffer = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_clear_namespace(buffer, vim.g.virtual_column_namespace, 0, -1)
 
   if vim.g.virtual_column_enabled then
-    local buffer = vim.api.nvim_get_current_buf()
-
     local buftype = vim.fn.getbufvar(buffer, '&buftype')
     local filetype = vim.fn.getbufvar(buffer, '&filetype')
 
