@@ -1,5 +1,7 @@
 # Virtual Column
 
+If you somehow found this, I am no longer working on it. This was never meant to be a big package, but a fun project to learn neovim plugin development. There are better alternatives available now such as https://github.com/lukas-reineke/virt-column.nvim
+
 Simple lua plugin that utilizes neovim's virtualtext feature to print a
 prettier column markers.
 
